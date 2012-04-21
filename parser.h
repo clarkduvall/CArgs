@@ -1,0 +1,49 @@
+#ifndef _PARSER_H
+#define _PARSER_H
+
+#include <map>
+#include <vector>
+
+typedef std::map<char, double> ArgMap;
+typedef std::pair<char, double> ArgPair;
+typedef std::vector<char*> ArgVec;
+
+class Args {
+  public:
+   Args() {}
+   ~Args() {}
+
+   // Parses command line arguments.
+   // |map| a mapping of characters to doubles which is used to determine
+   // if a -x option is specified. If the option has a value after it then
+   // this is stored in the map. Default values can be put in before |parseArgs|
+   // is called.
+   // |vec| a vector of the options that do not begin with a '-'
+   void ParseArgs(int argc, char** argv);
+
+   // Set default arguments.
+   void SetDefault(char c, double v);
+   void SetDefault(char c, int v);
+
+   // Determines if a -x option was specified.
+   bool HasOption(char c);
+
+   // Get '-' option values, or 0 if they don't have a value set.
+   double GetDouble(char c);
+   int GetInt(char c);
+
+   // Get an arg that does not start with a '-' at the specified index.
+   char* GetArg(int i);
+
+   // Get how many non '-' args there were.
+   int GetArgNum();
+
+  private:
+   // Check if an arg is a num. Needed because |atof()| returns 0.0 if it
+   // cannot parse the argument.
+   static bool isNum(const char* str);
+   ArgMap map_;
+   ArgVec vec_;
+};
+
+#endif
