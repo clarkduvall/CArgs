@@ -3,9 +3,9 @@ easily check which arguments have been specified. It allows defaults to be set
 for arguments of the form '-x 0' or '--x 0'. It also preserves the order of
 arguments not beginning with a '-'.
 
-For example, the running the command:
+For example, running the command:
 
-   "test --bob 5 -asd -g 2.4 out"
+   test --bob 5 -asd -g 2.4 out
 
 would set create an Args object with this mapping:
 
@@ -20,3 +20,5 @@ GetDouble() functions.
 
 "out" would be the first argument in the argument vector, which can be
 retrieved with GetArg().
+
+The Makefile will make parser-tests, a set of tests for CArgs.
