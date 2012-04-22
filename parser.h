@@ -27,10 +27,10 @@ class Args {
    void SetDefault(const std::string& c, double v);
    void SetDefault(const std::string& c, int v);
 
-   // Determines if a -x option was specified.
+   // Determines if a '-' or '--' option was specified.
    bool HasOption(const std::string& c);
 
-   // Get '-' option values, or 0 if they don't have a value set.
+   // Get '-' or '--' option values, or 0 if they don't have a value set.
    double GetDouble(const std::string& c);
    int GetInt(const std::string& c);
 
