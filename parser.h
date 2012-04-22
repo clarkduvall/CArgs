@@ -7,7 +7,7 @@
 
 typedef std::map<std::string, double> ArgMap;
 typedef std::pair<std::string, double> ArgPair;
-typedef std::vector<char*> ArgVec;
+typedef std::vector<const char*> ArgVec;
 
 class Args {
   public:
@@ -21,6 +21,7 @@ class Args {
    // is called.
    // |vec| a vector of the options that do not begin with a '-'
    void ParseArgs(int argc, char** argv);
+   void ParseArgs(int argc, const char** argv);
 
    // Set default arguments.
    void SetDefault(const std::string& c, double v);
@@ -34,7 +35,7 @@ class Args {
    int GetInt(const std::string& c);
 
    // Get an arg that does not start with a '-' at the specified index.
-   char* GetArg(int i);
+   const char* GetArg(int i);
 
    // Get how many non '-' args there were.
    int GetArgNum();

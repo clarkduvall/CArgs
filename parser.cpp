@@ -16,6 +16,10 @@ bool Args::isNum(const char* str) {
 }
 
 void Args::ParseArgs(int argc, char* argv[]) {
+   ParseArgs(argc, (const char**)argv);
+}
+
+void Args::ParseArgs(int argc, const char* argv[]) {
    double val = 0;
    std::string to_insert;
    for (int i = 1; i < argc; i++) {
@@ -72,7 +76,7 @@ int Args::GetInt(const std::string& c) {
    return (int)GetDouble(c);
 }
 
-char* Args::GetArg(int i) {
+const char* Args::GetArg(int i) {
    if (vec_.size() <= (size_t)i)
       return NULL;
    return vec_[i];
