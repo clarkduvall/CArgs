@@ -3,9 +3,10 @@
 
 #include <map>
 #include <vector>
+#include <string>
 
-typedef std::map<char, double> ArgMap;
-typedef std::pair<char, double> ArgPair;
+typedef std::map<std::string, double> ArgMap;
+typedef std::pair<std::string, double> ArgPair;
 typedef std::vector<char*> ArgVec;
 
 class Args {
@@ -22,15 +23,15 @@ class Args {
    void ParseArgs(int argc, char** argv);
 
    // Set default arguments.
-   void SetDefault(char c, double v);
-   void SetDefault(char c, int v);
+   void SetDefault(const std::string& c, double v);
+   void SetDefault(const std::string& c, int v);
 
    // Determines if a -x option was specified.
-   bool HasOption(char c);
+   bool HasOption(const std::string& c);
 
    // Get '-' option values, or 0 if they don't have a value set.
-   double GetDouble(char c);
-   int GetInt(char c);
+   double GetDouble(const std::string& c);
+   int GetInt(const std::string& c);
 
    // Get an arg that does not start with a '-' at the specified index.
    char* GetArg(int i);
