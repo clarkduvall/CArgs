@@ -1,4 +1,4 @@
-#include "parser.h"
+#include "cargs.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -10,6 +10,7 @@ void test1();
 testFunc tests[] = {test1};
 
 int main(int argc, char* argv[]) {
+   printf("CArgs tests. Prints \'.\' for success, \'F\' for failure.\n\n");
    for (int i = 0; i < sizeof(tests) / sizeof(testFunc); i++) {
       printf("Running test %d\n", i + 1);
       tests[i]();
@@ -30,7 +31,7 @@ void test1() {
    int argc = 7;
    Args* args = new Args();
    args->SetDefault("e", 23);
-   args->ParseArgs(argc, argv);
+   args->Parse(argc, argv);
    assert(args->HasOption("bob"));
    assert(args->HasOption("a"));
    assert(args->HasOption("b"));

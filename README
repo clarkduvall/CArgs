@@ -21,4 +21,5 @@ GetDouble() functions.
 "out" would be the first argument in the argument vector, which can be
 retrieved with GetArg().
 
-The Makefile will make parser-tests, a set of tests for CArgs.
+The Makefile will make the cargs library as well as cargs-tests, a test
+suite for CArgs. Look at the Makefile for how to link libcargs.a.
