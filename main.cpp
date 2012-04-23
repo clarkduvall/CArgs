@@ -11,8 +11,8 @@ testFunc tests[] = {test1};
 
 int main(int argc, char* argv[]) {
    printf("CArgs Tests\nPrints \'.\' for success, \'F\' for failure.\n\n");
-   for (int i = 0; i < sizeof(tests) / sizeof(testFunc); i++) {
-      printf("Running test %d\n", i + 1);
+   for (size_t i = 0; i < sizeof(tests) / sizeof(testFunc); i++) {
+      printf("Running test %lu\n", i + 1);
       tests[i]();
       printf("\n");
    }   
@@ -42,5 +42,5 @@ void test1() {
    assert(args->GetInt("d") == 4);
    assert(args->GetInt("e") == 23);
    assert(args->GetArgNum() == 1);
-   assert(args->GetArg(0) == "jimmy");
+   assert(args->GetArg(0) == std::string("jimmy"));
 }

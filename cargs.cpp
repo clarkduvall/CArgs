@@ -8,7 +8,7 @@
 
 // static
 bool CArgs::isNum(const char* str) {
-   for (int i = 0; i < strlen(str); i++) {
+   for (size_t i = 0; i < strlen(str); i++) {
       if (str[i] != '0' && str[i] != '.')
          return false;
    }
@@ -30,7 +30,7 @@ void CArgs::Parse(int argc, const char* argv[]) {
             to_insert = &argv[i][2];
          }
          else if (strlen(argv[i]) > 2) {
-            for (int j = 1; j < strlen(argv[i]); j++) {
+            for (size_t j = 1; j < strlen(argv[i]); j++) {
                to_insert = argv[i][j];
                map_.insert(ArgPair(to_insert, 0.0));
             }
@@ -66,7 +66,6 @@ bool CArgs::HasOption(const std::string& c) {
 }
 
 double CArgs::GetDouble(const std::string& c) {
-   double val = 0.0;
    if (map_.find(c) == map_.end())
       return 0.0;
    return map_[c];
