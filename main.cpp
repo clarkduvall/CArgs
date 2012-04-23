@@ -10,7 +10,7 @@ void test1();
 testFunc tests[] = {test1};
 
 int main(int argc, char* argv[]) {
-   printf("CArgs tests. Prints \'.\' for success, \'F\' for failure.\n\n");
+   printf("CArgs Tests\nPrints \'.\' for success, \'F\' for failure.\n\n");
    for (int i = 0; i < sizeof(tests) / sizeof(testFunc); i++) {
       printf("Running test %d\n", i + 1);
       tests[i]();
@@ -29,7 +29,7 @@ void assert(bool cond) {
 void test1() {
    const char* argv[] = {"test", "--bob", "5.2", "-abc", "-d", "4", "jimmy"};
    int argc = 7;
-   Args* args = new Args();
+   CArgs* args = new CArgs();
    args->SetDefault("e", 23);
    args->Parse(argc, argv);
    assert(args->HasOption("bob"));

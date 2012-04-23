@@ -9,15 +9,15 @@ typedef std::map<std::string, double> ArgMap;
 typedef std::pair<std::string, double> ArgPair;
 typedef std::vector<const char*> ArgVec;
 
-class Args {
+class CArgs {
   public:
-   Args() {}
-   ~Args() {}
+   CArgs() {}
+   ~CArgs() {}
 
    // Parses command line arguments.
    // |map| a mapping of characters to doubles which is used to determine
    // if a -x option is specified. If the option has a value after it then
-   // this is stored in the map. Default values can be put in before |parseArgs|
+   // this is stored in the map. Default values can be put in before |Parse|
    // is called.
    // |vec| a vector of the options that do not begin with a '-'
    void Parse(int argc, char** argv);

@@ -7,7 +7,7 @@
 #include <string>
 
 // static
-bool Args::isNum(const char* str) {
+bool CArgs::isNum(const char* str) {
    for (int i = 0; i < strlen(str); i++) {
       if (str[i] != '0' && str[i] != '.')
          return false;
@@ -15,11 +15,11 @@ bool Args::isNum(const char* str) {
    return true;
 }
 
-void Args::Parse(int argc, char* argv[]) {
+void CArgs::Parse(int argc, char* argv[]) {
    Parse(argc, (const char**)argv);
 }
 
-void Args::Parse(int argc, const char* argv[]) {
+void CArgs::Parse(int argc, const char* argv[]) {
    double val = 0;
    std::string to_insert;
    for (int i = 1; i < argc; i++) {
@@ -53,35 +53,35 @@ void Args::Parse(int argc, const char* argv[]) {
    }
 }
 
-void Args::SetDefault(const std::string& c, double v) {
+void CArgs::SetDefault(const std::string& c, double v) {
    map_.insert(ArgPair(c, v));
 }
 
-void Args::SetDefault(const std::string& c, int v) {
+void CArgs::SetDefault(const std::string& c, int v) {
    SetDefault(c, (double)v);
 }
 
-bool Args::HasOption(const std::string& c) {
+bool CArgs::HasOption(const std::string& c) {
    return map_.find(c) != map_.end();
 }
 
-double Args::GetDouble(const std::string& c) {
+double CArgs::GetDouble(const std::string& c) {
    double val = 0.0;
    if (map_.find(c) == map_.end())
       return 0.0;
    return map_[c];
 }
 
-int Args::GetInt(const std::string& c) {
+int CArgs::GetInt(const std::string& c) {
    return (int)GetDouble(c);
 }
 
-const char* Args::GetArg(int i) {
+const char* CArgs::GetArg(int i) {
    if (vec_.size() <= (size_t)i)
       return NULL;
    return vec_[i];
 }
 
-int Args::GetArgNum() {
+int CArgs::GetArgNum() {
    return (int)vec_.size();
 }
