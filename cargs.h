@@ -15,11 +15,8 @@ class CArgs {
    ~CArgs() {}
 
    // Parses command line arguments.
-   // |map| a mapping of characters to doubles which is used to determine
-   // if a -x option is specified. If the option has a value after it then
-   // this is stored in the map. Default values can be put in before |Parse|
-   // is called.
-   // |vec| a vector of the options that do not begin with a '-'
+   // |argc| number of arguments
+   // |argv| argument vector
    void Parse(int argc, char** argv);
    void Parse(int argc, const char** argv);
 
