@@ -3,6 +3,11 @@ easily check which arguments have been specified. It allows defaults to be set
 for arguments of the form '-x 0' or '--x 0'. It also preserves the order of
 arguments not beginning with a '-'.
 
+
+***********
+* Example *
+***********
+
 For example, running the command:
 
    test --bob 5 -asd -g 2.4 out
@@ -20,6 +25,31 @@ GetDouble() functions.
 
 "out" would be the first argument in the argument vector, which can be
 retrieved with GetArg().
+
+
+****************************
+* Supported argument forms *
+****************************
+
+Notation:
+ <n> - a number (3, 4.2, 234242342)
+ x - a single character (a, b)
+ xxx - multiple characters
+ string - a string
+
+CArgs will parse any combination of arguments of the forms:
+   -x
+   -x <n>
+   -xxx
+   --string
+   --string=<n>
+   --string <n>
+   string
+
+
+************
+* Makefile *
+************
 
 The Makefile will make the cargs library as well as cargs-tests, a test
 suite for CArgs. Look at the Makefile for how to link libcargs.a.

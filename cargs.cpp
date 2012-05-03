@@ -22,14 +22,17 @@ void CArgs::Parse(int argc, char* argv[]) {
 void CArgs::Parse(int argc, const char* argv[]) {
    double val = 0;
    std::string to_insert;
+   size_t pos = to_insert.npos;
    for (int i = 1; i < argc; i++) {
       switch (argv[i][0]) {
       case '-':
          val = 0;
          if (argv[i][1] == '-') {
+            // Argument of long form (--example).
             to_insert = &argv[i][2];
          }
          else if (strlen(argv[i]) > 2) {
+            // Multiple arguments of short form (-abc).
             for (size_t j = 1; j < strlen(argv[i]); j++) {
                to_insert = argv[i][j];
                map_.insert(ArgPair(to_insert, 0.0));
@@ -37,13 +40,23 @@ void CArgs::Parse(int argc, const char* argv[]) {
             break;
          }
          else {
+            // Single argument of short form (-a).
             to_insert = argv[i][1];
          }
-         if (i + 1 < argc)
+         // Get value of arg if provided.
+         if ((pos = to_insert.find("=")) != to_insert.npos) {
+            std::string num = to_insert.substr(pos + 1);
+            val = atof(num.c_str());
+            to_insert.erase(pos);
+         }
+         else if (i + 1 < argc) {
             val = atof(argv[i + 1]);
+         }
          map_.erase(to_insert);
          map_.insert(ArgPair(to_insert, val));
-         if (val != 0.0 || (i + 1 < argc && val == 0.0 && isNum(argv[i + 1])))
+         // If value is found, increment argument index.
+         if (pos == to_insert.npos && (val != 0.0 ||
+             (i + 1 < argc && val == 0.0 && isNum(argv[i + 1]))))
             i++;
          break;
       default:

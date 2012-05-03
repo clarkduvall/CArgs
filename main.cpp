@@ -27,20 +27,25 @@ void assert(bool cond) {
 }
 
 void test1() {
-   const char* argv[] = {"test", "--bob", "5.2", "-abc", "-d", "4", "jimmy"};
-   int argc = 7;
+   const char* argv[] = {"test", "--bob", "5.2", "-abc", "-d", "4", "jimmy",
+       "--jimbob=5", "-f", "3.1"};
+   int argc = 10;
    CArgs* args = new CArgs();
    args->SetDefault("e", 23);
    args->Parse(argc, argv);
    assert(args->HasOption("bob"));
+   assert(args->HasOption("jimbob"));
    assert(args->HasOption("a"));
    assert(args->HasOption("b"));
    assert(args->HasOption("c"));
    assert(args->HasOption("d"));
    assert(args->HasOption("e"));
+   assert(args->HasOption("f"));
    assert(args->GetDouble("bob") == 5.2);
+   assert(args->GetInt("jimbob") == 5);
    assert(args->GetInt("d") == 4);
    assert(args->GetInt("e") == 23);
+   assert(args->GetDouble("f") == 3.1);
    assert(args->GetArgNum() == 1);
    assert(args->GetArg(0) == std::string("jimmy"));
 }
